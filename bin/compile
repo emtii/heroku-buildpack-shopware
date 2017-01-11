@@ -16,17 +16,24 @@ cd shopware
 source $BP_DIR/lib/output.sh
 
 # Start
-header "Fetching dependencies"
-
-npm i -g grunt
+header "Fetching shopware"
 
 wget https://github.com/shopware/shopware/archive/$SHOPWARE_VERSION.zip -O shopware.zip
 unzip shopware.zip
+
+info "deleting shopware.zip"
 rm shopware.zip
+
+info "get known folder name"
 mv * shopware-git
 
+info "move shopware files"
+# enable move for dotfiles
+shopt -s dotglob
 mv shopware-git/* .
-mv shopware-git/.* .
+shopt -u dotglob
+
 rm -rf shopware-git
 
-
+header "Fetching dependencies"
+npm i -g grunt
