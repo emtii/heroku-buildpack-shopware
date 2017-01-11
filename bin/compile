@@ -35,5 +35,25 @@ shopt -u dotglob
 
 rm -rf shopware-git
 
+
+
 header "Fetching dependencies"
 npm i -g grunt
+
+
+
+header "Installing shopware"
+info "setting file permissions"
+chmod -R 755 var
+chmod -R 755 web
+chmod -R 755 files
+chmod -R 755 media
+chmod -R 755 engine/Shopware/Plugins/Community
+
+info "building with ant"
+cd build/
+ant configure
+ant build-unit
+
+header "Shopware console test"
+bin/console
