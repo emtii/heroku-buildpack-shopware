@@ -38,6 +38,3 @@ chmod -R 755 web
 chmod -R 755 files
 chmod -R 755 media
 chmod -R 755 engine/Shopware/Plugins/Community
-
-header "Shopware console test"
-bin/console
