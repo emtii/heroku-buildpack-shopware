@@ -25,20 +25,6 @@ unzip shopware.zip
 info "deleting shopware.zip"
 rm shopware.zip
 
-info "get known folder name"
-mv * shopware-git
-
-info "move shopware files"
-# enable move for dotfiles
-shopt -s dotglob
-mv shopware-git/* .
-shopt -u dotglob
-
-rm -rf shopware-git
-
-
-
-
 
 header "Fetching dependencies"
 npm i -g grunt
