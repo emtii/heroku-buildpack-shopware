@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+set -o errexit    # always exit on error
+set -o pipefail   # don't ignore exit codes when piping output
+
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+SHOPWARE_VERSION=$(cat $BUILD_DIR/shopware.version | xargs)
+
+cd $BUILD_DIR
+mkdir shopware
+cd shopware
+
+source $BP_DIR/lib/output.sh
+
+# Start
+header "Fetching dependencies"
+
+npm i -g grunt
+
+wget https://github.com/shopware/shopware/archive/$SHOPWARE_VERSION.zip -O shopware.zip
+unzip shopware.zip
+rm shopware.zip
+mv * shopware-git
+
+mv shopware-git/* .
+mv shopware-git/.* .
+rm -rf shopware-git
+
+

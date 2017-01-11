@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# bin/detect <build-dir>
+
+BUILD_DIR=$1
+
+if [ ! -f $BUILD_DIR/shopware.version ]; then
+    echo "no"
+    exit 1
+fi
+
+echo "Shopware"
+exit 0
