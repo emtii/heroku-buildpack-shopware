@@ -14,11 +14,12 @@ mkdir shopware
 cd shopware
 
 source $BP_DIR/lib/output.sh
+source $BP_DIR/lib/shopware.sh
 
 # Start
 header "Fetching shopware"
 
-wget https://github.com/shopware/shopware/archive/$SHOPWARE_VERSION.zip -O shopware.zip
+wget $(get_shopware_url $SHOPWARE_VERSION) -O shopware.zip
 unzip shopware.zip
 
 info "deleting shopware.zip"
@@ -37,6 +38,8 @@ rm -rf shopware-git
 
 
 
+
+
 header "Fetching dependencies"
 npm i -g grunt
 
@@ -49,11 +52,6 @@ chmod -R 755 web
 chmod -R 755 files
 chmod -R 755 media
 chmod -R 755 engine/Shopware/Plugins/Community
-
-info "building with ant"
-cd build/
-ant configure
-ant build-unit
 
 header "Shopware console test"
 bin/console

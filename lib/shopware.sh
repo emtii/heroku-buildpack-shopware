@@ -1,0 +1,61 @@
+get_shopware_url() {
+    search_version=$1
+    VERSIONS=(
+        "5.2.13:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.13_dbca3b24f22f8f52512975133374b9b85a39a123.zip"
+        "5.2.12:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.12_8c8f67d848ef15aafaac6fed5f0eef062644250f.zip"
+        "5.2.11:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.11_c2c89cba1e16f554ff7239574a2865254a6b97a2.zip"
+        "5.2.10:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.10_81bb8855627da325b797a477602189377b411bcf.zip"
+        "5.2.9:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.9_29c0a379c74f8fd89911f31dd671a0c7d28f18fe.zip"
+        "5.2.8:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.8_b41bb9f24d00b3d8a0bf880361ec06fc5e2e67d5.zip"
+        "5.2.7:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.7_b2081fd410306d74001ae1a2ce725b003c3e0259.zip"
+        "5.2.6:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.6_ecdfff604b1fa93a3b50606d378f9e2bf681890f.zip"
+        "5.2.5:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.5_cc3b6e432af2144fdd4c5e8e1b28cda0398ef7f4.zip"
+        "5.2.4:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.4_b1a52d04c9c8cd60205c181eb7d51aa5a516bff0.zip"
+        "5.2.3:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.3_3066bee006dc8fa082b6691a6af186810b3e4f05.zip"
+        "5.2.2:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.2_fec9a405e4d6043625058bc5bf3badecd9197333.zip"
+        "5.2.1:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.1_b87844ddbd0b61f85b78764983daf220662fd273.zip"
+        "5.2.0:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.2.0_b9d72b7ea4f2ad7092d761ebb4f38373f2b3ff43.zip"
+        "5.1.6:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.1.6_04ec396ac8d2fa8c1e088bc2bd2c8132ab56c270.zip"
+        "5.1.5:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.1.5_ca9dc97e4751d0cd22d08548c7efe4edc6124f39.zip"
+        "5.1.4:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.1.4_2a6c1d025af042525558ba10d738eeb19ed75ff4.zip"
+        "5.1.3:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.1.3_f089bf38b9a0041b80b24c56a03954dccea5e117.zip"
+        "5.1.2:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.1.2_5d9a9f30821d7ac1be1d5bc7c21d7132e979e38e.zip"
+        "5.1.1:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.1.1_3ad625236466a973e6d569d5699f1b7094121298.zip"
+        "5.1.0:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.1.0_550a2758edda9e488a6d092839a72bff9fc617ca.zip"
+        "5.0.4:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.0.4_5b69a44ab451eced9f970bc7732d2a4cc7176e45.zip"
+        "5.0.3:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.0.3_64a91b5fae65b7970a9e02b2a13f1733a4c5c6cb.zip"
+        "5.0.2:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.0.2_f003e4550105c830fc6ca87b340ffa0aba1ae969.zip"
+        "5.0.1:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.0.1_2ec5c1c8427afdc5654aec88bf51a80db93304ef.zip"
+        "5.0.0:http://releases.s3.shopware.com.s3.amazonaws.com/install_5.0.0_c122de4b3eba2d45f1085cc8df74ff96804179ec.zip"
+        "4.3.7:http://releases.s3.shopware.com.s3.amazonaws.com/install_4.3.7_86f0ac9f4633586198cd12da1bd311130ac85de3.zip"
+        "4.3.6:http://releases.s3.shopware.com.s3.amazonaws.com/install_4.3.6_351e326e20363bfe1ba1f3bd821b870dd078d8f4.zip"
+        "4.3.5:http://releases.s3.shopware.com.s3.amazonaws.com/install_4.3.5_06cc302f7f0db92e8e40d8a9fc4190ec84c3314b.zip"
+        "4.3.4:http://releases.s3.shopware.com.s3.amazonaws.com/install_4.3.4_2c9a7c36e3e4601763b1b9022627f9563497747b.zip"
+        "4.3.3:http://releases.s3.shopware.com.s3.amazonaws.com/install_4.3.3_888c70fdd983ac0d965ab2ea6ada54a1848bb192.zip"
+        "4.3.2:http://releases.s3.shopware.com.s3.amazonaws.com/install_4.3.2_e6d1f12c47e61fa1c10893665234cf13b6b3e9f0.zip"
+        "4.3.0:http://releases.s3.shopware.com/install_4.3.0_3194284222dda5693ef5ec2c65b5dce378213fb0.zip"
+        "4.2.3:http://releases.s3.shopware.com/install_4.2.3.zip"
+        "4.2.1:http://releases.s3.shopware.com/install_4.2.1.zip"
+        "4.1.4:http://releases.s3.shopware.com/install_4.1.4.zip"
+        "4.1.3:http://releases.s3.shopware.com/install_4.1.3.zip"
+        "4.1.2:http://releases.s3.shopware.com/install_4.1.2.zip"
+        "4.1.1:http://releases.s3.shopware.com/install_4.1.1.zip"
+        "4.1.0:http://releases.s3.shopware.com/install_4.1.0.zip"
+        "4.0.8:http://releases.s3.shopware.com/install_4.0.8.zip"
+        "4.0.7:http://releases.s3.shopware.com/install_4.0.7.zip"
+        "4.0.6:http://releases.s3.shopware.com/install_4.0.6.zip"
+        "4.0.5:http://releases.s3.shopware.com.s3.amazonaws.com/install_4.0.5.zip"
+        "4.0.4:http://releases.s3.shopware.com.s3.amazonaws.com/install_4.0.4.zip"
+        "4.0.3:http://releases.s3.shopware.com/install_4.0.3.zip"
+        "4.0.1:http://releases.s3.shopware.com/install_4.0.1.zip"
+        "3.5.6:http://files.shopware.de/download.php?package=install_ioncube"
+    )
+
+    for entry in "${VERSIONS[@]}" ; do
+        VERSION=${entry%%:*}
+        ASSET_URL=${entry#*:}
+        if [[ $search_version == $VERSION ]]; then
+            echo $ASSET_URL
+        fi
+    done
+}
